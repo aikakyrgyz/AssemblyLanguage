@@ -1,0 +1,78 @@
+//Kubanychbek kyzy Aigerim
+//Project 4 - Selection Sort
+//CS 17
+//Nov 7, 2020
+
+program SelectionSort;
+#include ("stdlib.hhf");
+
+
+const 
+	numelements:=18;
+static
+	MyArray: uns32[numelements] := [87,77,11,22,33,99,44,66,88,67,89,56,23,14,17,35,35,37];
+	LastIndex : uns32;
+	Index: uns32;
+
+
+begin SelectionSort;
+
+	mov(numelements, EBX);
+	mov(EBX, LastIndex);
+	sub(1, LastIndex);
+	stdout.put(nl, "Kubanychbek kyzy Aigerim - Project 4");
+	stdout.put(nl, nl);
+	stdout.put("Selection Sort, number of array elements: ", numelements, nl);
+	stdout.put("Original array elements: ", nl);
+	for(mov(0, EBX); EBX<numelements; inc(EBX)) do
+		stdout.puti32Size(MyArray[EBX*4], 4, ' ');
+	endfor;
+	stdout.put(nl, nl);
+
+
+	while(LastIndex > 0) do
+		mov(0, Index);
+		mov(Index, ECX); //copying Index to ECX register
+		mov(LastIndex, EDI); //copying LastIndex to EDI register
+
+		//------looping through the array to find the index of the largest number---
+		for(mov(0, EBX); EBX<=LastIndex; inc(EBX)) do 
+			mov(MyArray[EBX*4], EAX); // EAX = MyArray[i]
+			mov(MyArray[ECX*4], EDX); // EDX = MyArray[Index]
+
+			if(EDX<EAX) then	   //the max number is found
+				mov(EBX, ECX); //Index = i; Index is the max number
+			endif;
+		
+		endfor;
+
+		//------ending loop finding the max number-----------
+		
+		//------starting to sort, each new largest number is swapped with the last unsorted element
+		mov(EDI, EBX);                     //EBX = LastIndex
+		mov(MyArray[ECX*4], EBP);          //EBP = MyArray[Index]
+		mov(MyArray[EDI *4], ESI);         //ESI = MyArray[LastIndex]
+		mov(ECX, EBX);                     //EBX = Index 
+		mov(ESI, MyArray[EBX*4]);          //MyArray[Index] = MyArray[LastIndex]
+		mov(EDI, EBX);                     //EBX = LastIndex
+		mov(EBP, MyArray[EBX*4]);          //MyArray[LastIndex] = MyArray[Index]
+		//-------ending swapping (sorting)
+		
+		
+		sub(1, LastIndex);                 //Decrementing last index
+		
+		//-------printing the whole array each sorting loop ---------
+
+		for(mov(0, EBX); EBX<numelements; inc(EBX)) do
+			stdout.puti32Size(MyArray[EBX*4], 4, ' ');
+		endfor;
+		stdout.put(nl);
+
+		// -----ending printing the sorted array
+		
+	endwhile;	
+	stdout.put(nl, nl);
+	stdout.put("Kubanychbek kyzy Aigerim -End of Project 4", nl, nl);
+
+	
+end SelectionSort;

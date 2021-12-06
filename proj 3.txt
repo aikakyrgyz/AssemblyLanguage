@@ -1,0 +1,94 @@
+// Kubanychbek kyzy Aigerim
+// Project 3: locating input on the heap memory
+// CS17
+// October 29th, 2020
+
+program heapMemory;
+#include ("stdlib.hhf");
+
+static
+	memPointer: uns32; //the pointer must be 32 bits always 
+	counter: uns32:=0; //counter will keep track of numbers entered, initialized to 0, needed to make it 32bit number for future purpose
+	counter2: uns32;
+	input: int32; // variable to store the user input, accepts signed and unsigned numbers
+	
+ 
+begin heapMemory;
+	mem.alloc(1500); //allocating memory (1500 bytes)
+	mov(EAX, memPointer); // saving EAX (i.e. allocation address)
+	stdout.put(nl);
+	stdout.put("Kubanychbek kyzy Aigerim - Project 3", nl);
+	stdout.put(nl);
+	stdout.put("----------------------------------------------------------", nl);
+	stdout.put(nl);
+
+	stdout.put("Enter a number (+ or -), enter 0 to exit the program", nl);
+	stdin.get(input); // saving the input in the input variable
+ 
+
+// ----------------- while do loop------------------------------
+	while (input <> 0) do
+		add(1, counter); //incrementing the counter
+		mov(input, [EAX]);// copying the number entered to the memory (register-indirect)
+		add(4, EAX);     //move the pointer to the next available space
+		
+		stdout.put("Enter a number (+ or -), enter 0 to exit the program", nl);
+		stdin.get(input); 
+	endwhile;
+// --------------- end of while do loop ------------------------
+
+
+
+//---------------- printing out the numbers--------------------
+
+	//--------printing the first entered number ------
+
+	mov(0, counter2);  //using the counter2 to move the memPointer to the first number, by moving it back by 4*counter
+	mov(counter, ECX);
+	add(ECX, counter2);
+	add(ECX, counter2);
+	add(ECX, counter2);
+	add(ECX, counter2); 
+	stdout.put(nl);
+	sub(counter2, EAX); //pointing to the first number by subtracting 4*counter from EAX
+	mov([EAX], input);    //copying the item from the address to the variable
+	stdout.put("Numbers entered are: ");
+	stdout.put( input, " ");
+
+	//--------printing numbers following the first number-------
+
+	sub(1, counter);
+
+	//-------- for do loop ----- 
+		//prints all the numbers following the first number
+
+
+	for(mov(0, EBX); EBX < counter ; inc(EBX)) do 
+		add(4, EAX);
+		mov([EAX], input);    //copying the item from the address to the variable
+		stdout.put( input, " ");
+	endfor;
+
+//------------end for loop-------------------
+		
+
+//----------------ending printing the numbers------------------
+	stdout.put(nl);
+	stdout.put(nl);
+	stdout.put("----------------------------------------------------------", nl);
+	stdout.put(nl);
+	stdout.put("Kubanychbek kyzy Aigerim - End of Project 3", nl)
+
+//---------------freeing the allocated memory ------------------
+	mov(memPointer, EAX);  // obtaining the address of the located memory to delete
+	mem.free(EAX);        //releasing the allocated memory 
+
+end heapMemory;
+
+
+
+ 
+		
+	
+
+

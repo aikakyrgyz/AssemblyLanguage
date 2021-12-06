@@ -1,0 +1,137 @@
+// Kubanychbek kyzy Aigerim
+// Project 5: printing shapes
+// CS17
+// November 20th, 2020
+
+program Stars;
+#include ("stdlib.hhf");
+
+var 
+	numStars: int8;
+	numStarsloop: int8;
+	numStarsloop2: int8;
+
+begin Stars;
+	stdout.put(nl, "Name: Kubanychbek kyzy Aigerim", nl, nl);
+	stdout.put("Please enter a positive integer (5 to 10): ");
+	stdin.getu8();
+	mov(AL, numStars);
+
+//shape A
+	stdout.put(nl, "---------- Shape A ----------");
+
+	for(mov(0, Al); AL<=numStars; inc(AL)) do
+	     for(mov(0,BL);  BL<AL;  inc(BL)) do
+			stdout.put("* ");
+	     endfor;
+	stdout.put(nl, nl); //so that there is an empty line between each row
+	endfor;
+
+//shape B
+
+	stdout.put("---------- Shape B ----------");
+	stdout.put(nl, nl);
+	
+	for(mov(numStars, AL); AL>0; dec(AL)) do
+		for(mov(0,BL);  BL<AL;  inc(BL)) do
+			stdout.put("* ");
+	 	endfor;
+	stdout.put(nl, nl); //so that there is an empty line between each row
+	endfor;
+
+//shape C
+
+	stdout.put("---------- Shape C ----------");
+	stdout.put(nl, nl);
+
+	for(mov(0, Al); AL<numStars; inc(AL)) do     //i
+		for(mov(0,BL);  BL<AL;  inc(BL)) do  //j
+			stdout.put("  ");
+	 	endfor;
+
+	mov(numStars, AH);
+	mov(AH, numStarsloop);
+	sub(AL, numStarsloop); //numStarsloop = numStars - AL // j = numStars-i
+
+		for(mov(0,BL);  BL<numStarsloop;  inc(BL)) do
+			stdout.put("* ");
+		endfor;
+
+	stdout.put(nl, nl); //so that there is an empty line between each row
+	endfor;
+
+//shape D
+
+	stdout.put("---------- Shape D ----------");
+
+	for(mov(0, AL); AL <=numStars; inc(AL)) do 
+		mov(numStars, CL);
+		sub(AL, CL);                 // CL = numStars - AL
+
+		for(mov(0, BL); BL<CL; INC(BL)) do 
+			stdout.put("  ");
+		endfor;
+	
+		for(mov(0, BL); BL <AL; inc(BL)) do
+			stdout.put("* ");
+		endfor;
+
+		stdout.put(nl nl);
+	endfor;
+
+//shape E
+
+	stdout.put("---------- Shape E ----------");
+	stdout.put(nl, nl);
+
+	for(mov(0, AL); AL <numStars; inc(AL)) do 
+		mov(numStars, CL);
+		sub(AL, CL);            //CL = numStars - AL // CL = numStars - i
+
+		for(mov(0, BL); BL<CL; INC(BL)) do 
+			stdout.put("  ");
+		endfor;
+	stdout.put("*");
+	stdout.put(nl, nl);
+	endfor;
+
+
+
+//shape F
+	stdout.put("---------- Shape F ----------");
+	stdout.put(nl, nl);
+
+	for(mov(0, AL); AL <numStars; inc(AL)) do  //i
+		for(mov(0, BL); BL<AL; INC(BL)) do  //j
+			stdout.put("  ");
+		endfor;
+
+	stdout.put("*");
+	stdout.put(nl, nl); //so that there is an empty line between each row
+	endfor;
+
+//shape G //need an odd number
+
+	stdout.put("---------- Shape F ----------");
+	stdout.put(nl, nl);
+
+	for(mov(1, AL); AL<=numStars; inc(AL)) do           // (int i=1; i<=n; i++) //i = AL
+		for(mov(1, BL); BL<=numStars; inc(BL)) do   // (int j=1; j<=n; j++) //j = BL
+			mov(numStars, AH);
+			mov(AH,numStarsloop2);
+			add(1, numStarsloop2);
+			sub(AL, numStarsloop2);             //numStarsloop2 = j == (numStars+1-i) 
+			if( BL == AL || BL == numStarsloop2) then
+				stdout.put("*");
+		
+			else
+				stdout.put(" ");
+			endif;
+		
+		endfor;
+		stdout.put(nl, nl);
+		
+	endfor;
+stdout.put("---------- End of program ----------", nl);
+stdout.put("Name: Kubanychbek kyzy Aigerim", nl);
+end Stars;

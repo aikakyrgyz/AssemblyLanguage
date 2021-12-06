@@ -1,0 +1,20 @@
+                                                                                                          program MaxMin;
+#include ("stdlib.hhf");
+
+var
+counter: int32;
+input: int32;
+sum: int32;
+max: int32;
+min: int32;
+
+begin MaxMin;
+mov(0, counter);
+mov(0, input)
+stdout.put("Enter an integer: ");
+stdin.geti32();
+mov(eax, input);
+add(input, sum);
+stdout.put("The integer was: ", input);
+stdout.newln();
+end MaxMin;
